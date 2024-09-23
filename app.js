@@ -55,10 +55,6 @@ io.on("connection", function(uniquesocket){
                 currentPlayer = chess.turn();
                 io.emit("move", move);
                 io.emit("boardState", chess.fen());
-                if (chess.in_checkmate()) {
-                    const winner = currentPlayer === 'w' ? 'Black' : 'White'; // If it's white's turn, black has won
-                    io.emit("gameOver", { result: "checkmate", winner });
-                }
             }else{
                 console.log("Invalid Move : ", move);
                 uniquesocket.emit("Invalid Move", move);
