@@ -60,9 +60,6 @@ const renderBoard = () => {
     }
 };
 const handleMove = (source, target) => {
-    if (gameOver) {
-        return;
-    }
     const move = {
         from: `${String.fromCharCode(97+source.col)}${8-source.row}`,
         to: `${String.fromCharCode(97+target.col)}${8-target.row}`,
@@ -87,14 +84,6 @@ const getPieceUnicode = (piece) => {
     };
     return unicodePieces[piece.type] || "";
 };
-
-let gameOver = false;
-socket.on("gameOver", function(gameData) {
-    alert(`Game Over! ${gameData.winner} wins by ${gameData.result}.`);
-    // Optionally, you could disable further moves or reload the page to start a new game
-});
-
-
 socket.on("playerRole", function(role){
     playerRole = role;
     renderBoard();
