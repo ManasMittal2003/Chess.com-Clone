@@ -57,6 +57,7 @@ io.on("connection", function (uniquesocket) {
                 io.emit("boardState", chess.fen());
                 if (chess.isCheckmate()) {
                     io.emit("gameOver", { result: "checkmate", winner: currentPlayer === 'w' ? 'Black' : 'White' });
+                    chess.reset();
                 } else if (chess.inCheck()) {
                     io.emit("inCheck", { player: currentPlayer === 'w' ? 'White' : 'Black' });
                 }
